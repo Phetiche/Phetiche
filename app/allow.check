@@ -1,0 +1,7 @@
+
+ Remove this file in production environments.
+ If this file is removed then checking your Phetiche installation will
+ no longer be possible. You can also make this file unreadable to disable
+ the installation check.
+ 
+ Run the installation check like: http://hostname/pheticheck

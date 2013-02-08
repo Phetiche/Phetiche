@@ -1,0 +1,10 @@
+# .htaccess files are only valid -and useful- on Apache
+# servers. On Nginx they should not be used and it should be done
+# on a virtual host level. See the Nginx documentation on the subject.
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !\.(\.)
+RewriteCond %{REQUEST_URI} !(static).*\.(css|jpg|gif|png|js)
+RewriteRule .* index.php [L]
