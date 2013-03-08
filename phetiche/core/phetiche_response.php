@@ -335,7 +335,7 @@ class Phetiche_response {
 		 */
 		if ($variables) {
 			foreach ($variables as $key => $value) {
-				if (strpos($value, '|') !== false) {
+				if (is_string($value) && strpos($value, '|') !== false) {
 					list($operator, $value) = explode('|', $value);
 					if (function_exists($operator)) {
 						$value = $operator($value);
