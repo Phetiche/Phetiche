@@ -297,6 +297,9 @@ class Phetiche_response {
 			$this->template->debugging = Phetiche_config::get('templates/debug');
 			$this->template->caching = Phetiche_config::get('templates/cache');
 			$this->template->cache_lifetime = Phetiche_config::get('templates/cache_lifetime');
+			if (is_dir($base_path . 'app/modules/smarty')) {
+				$this->template->plugins_dir = array_merge($this->template->plugins_dir, array($base_path . 'app/modules/smarty'));
+			}
 
 			/**
 			 * Needed since we have a custom error handler; Phetiche_error()

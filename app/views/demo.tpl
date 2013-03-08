@@ -20,7 +20,7 @@
 
 	</form>
 
-	{$name}
+	{$name|powerball}
 	{$footer}
 
 </body>
