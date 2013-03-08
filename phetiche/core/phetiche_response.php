@@ -329,6 +329,9 @@ class Phetiche_response {
 
 		/**
 		 * Assign any possible variables to the template.
+		 * Also, at this point, if there is any logic to be applied to
+		 * either the variables or the templates (fetch & merge) then let's
+		 * get it done, smoothly.
 		 */
 		if ($variables) {
 			foreach ($variables as $key => $value) {
