@@ -2,7 +2,7 @@
 
 /**
  * The Phetiche response handler
- * 
+ *
  * @file			phetiche/core/phetiche_response.php
  * @description		The response object. This will handle the response related actions.
  * 					Using this method is optional but recommended.
@@ -26,25 +26,33 @@ class Phetiche_response {
 	 * @var string
 	 */
 	private $template = null;
-	
+
+	/**
+	 * A set of tamplate operation functions
+	 * @var arra
+	 */
+	private $template_operators = array(
+		'render',
+	);
+
 	/**
 	 * The headers sent along in the response
 	 * @var array
 	 */
 	private $response_headers = null;
-	
+
 	/**
 	 * The response HTTP status code. Defaults to 200 OK
 	 * @var int
 	 */
 	private $response_code = 200;
-	
+
 	/**
 	 * The response body to be sent back to the client
 	 * @var string
 	 */
 	private $response_body = null;
-	
+
 	/**
 	 * If the response was sent set this flag.
 	 * @see $this->send()
@@ -82,7 +90,7 @@ class Phetiche_response {
 	public function __construct($invoking_controller = '', $req = array())
 	{
 		$this->req = $req;
-		if ($invoking_controller) {	
+		if ($invoking_controller) {
 			$this->request_controller = $invoking_controller;
 		}
 	}
@@ -104,7 +112,7 @@ class Phetiche_response {
 	/**
 	 * Define a custom method (and arguments) to be called before
 	 * sending the response to the client.
-	 * 
+	 *
 	 * This comes in handy, since by default sending the response will terminate
 	 * the script execution, thus the after() (if defined) will not be triggered.
 	 *
@@ -132,8 +140,8 @@ class Phetiche_response {
 	public function httpCode($code)
 	{
 		if (!is_int($code) || ($code < 100) || ($code > 599)) {
-            throw new Phetiche_error(500); //5002
-        }
+			throw new Phetiche_error(500); //5002
+		}
 
 		$this->response_code = $code;
 		return $this;
@@ -149,11 +157,11 @@ class Phetiche_response {
 	 */
 	public function body($content = '')
 	{
-        $this->response_body = $content;
-        return $this;
+		$this->response_body = $content;
+		return $this;
 	}
 
-	 
+
 	/**
 	 * Send the response to the client.
 	 * By default sending a response will end the execution of the application.
@@ -186,17 +194,17 @@ class Phetiche_response {
 		if (!$code_sent) {
 			if ($this->response_headers) {
 				array_walk($this->response_headers, function($header, $header_key) { header($header_key . ': ' . $header['value']); });
-				$code_sent = count($this->response_headers) ? true : false;	
+				$code_sent = count($this->response_headers) ? true : false;
 			}
 		}
 
-        if (!$code_sent) {
-            header('HTTP/1.1 ' . $this->response_code);
-            $code_sent = true;
-        }
+		if (!$code_sent) {
+			header('HTTP/1.1 ' . $this->response_code);
+			$code_sent = true;
+		}
 
 		/**
-		 * A callback will only be returned when javascript 
+		 * A callback will only be returned when javascript
 		 * (Content-Type: application/javascript; charset=utf-8) is requested.
 		 */
 		if ($this->response_body) {
@@ -210,7 +218,7 @@ class Phetiche_response {
 				/**
 				 * If any strange Content-Type is received, then it is handled
 				 * from here in a separate method. This, basically, to provide flexible
-				 * ways to render with any possible Content-Type. 
+				 * ways to render with any possible Content-Type.
 				 */
 				$method = 'format' . ucfirst(str_replace('/', '', $this->req->response_format));
 				if (method_exists($this, $method)) {
@@ -220,7 +228,7 @@ class Phetiche_response {
 				}
 			}
 		}
-		
+
 		$this->response_sent = true;
 	}
 
@@ -238,7 +246,7 @@ class Phetiche_response {
 		if (!$this->response_sent) {
 			$this->send();
 		}
-		
+
 		exit(1);
 	}
 
@@ -293,7 +301,7 @@ class Phetiche_response {
 			/**
 			 * Needed since we have a custom error handler; Phetiche_error()
 			 */
-			$this->template->muteExpectedErrors();		
+			$this->template->muteExpectedErrors();
 		}
 
 		$this->template->template_dir = $base_path . Phetiche_config::get('templates/path');
@@ -318,9 +326,21 @@ class Phetiche_response {
 
 		/**
 		 * Assign any possible variables to the template.
-		 */ 
+		 */
 		if ($variables) {
 			foreach ($variables as $key => $value) {
+				if (strpos($value, '|') !== false) {
+					list($operator, $value) = explode('|', $value);
+					if (function_exists($operator)) {
+						$value = $operator($value);
+					} else {
+						switch ($operator) {
+							case 'render':
+								$value = $this->template->fetch($value . '.tpl');
+								break;
+						}
+					}
+				}
 				$this->template->assign($key, $value);
 			}
 		}

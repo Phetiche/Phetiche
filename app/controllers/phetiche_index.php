@@ -24,7 +24,7 @@ class Phetiche_index extends Phetiche_BASIC_Controller {
 	public function index()
 	{
 		Phetiche_format::tree($this->req->test);
-		$this->res->render('demo');
+		$this->res->render('demo', array('content' => 'render|content', 'footer' => 'render|footer', 'name' => 'strrev|Stefan'));
 		exit();
 
 		//echo Phetiche_server::DOCUMENT_ROOT();
