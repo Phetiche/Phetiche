@@ -5,6 +5,8 @@
 </head>
 <body>
 
+	{$content}
+
 	<h1>DEMO FORM</h1>
 	<form name="test" method="post" action="http://phetiche.local">
 		<input type="text" name="test" />
@@ -17,5 +19,8 @@
 		<input type="radio" name="checkme" />
 
 	</form>
+
+	{$name}
+	{$footer}
 
 </body>
