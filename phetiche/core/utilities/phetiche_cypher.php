@@ -60,7 +60,17 @@ class Phetiche_cypher {
 	public static function randomCode($text = null, $hash_algo = 'crc32')
 	{
 		$text = ($text) ? $text : microtime(true);
-		return strtoupper(hash($hash_algo, $text, false));
+		$hash = strtoupper(hash($hash_algo, $text, false));
+
+		/**
+		 * Return a PHP 5.3 compatible hash
+		 */
+		if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
+			return implode('', array_map('bin2hex', array_map('strrev', array_map('hex2bin', str_split($hash, 16)))));
+		} else {
+			return $hash;
+		}
+
 	}
 
 
@@ -79,5 +89,5 @@ class Phetiche_cypher {
 	{
 		return self::encryptText();
 	}
-	
+
 }

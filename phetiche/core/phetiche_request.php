@@ -28,8 +28,26 @@ final class Phetiche_request extends Phetiche_url {
 
 		if (function_exists('getallheaders')) {
 			$headers = getallheaders();
+			$headers = 1;
 		} else if (function_exists('apache_request_headers')) {
 			$headers = apache_request_headers();
+			$headers = 2;
+		} else {
+
+			/**
+			 * In case none of the above works, then let's try this
+			 * one, in which case it's most likely because we are
+			 * running on Nginx (or any other non-Apache server)
+			 */
+			foreach ($_SERVER as $name => $value) {
+				if (substr($name, 0, 5) == 'HTTP_') {
+					$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+				} else if ($name == 'CONTENT_TYPE') {
+					$headers['Content-Type'] = $value;
+				} else if ($name == 'CONTENT_LENGTH') {
+					$headers["Content-Length"] = $value;
+				}
+			}
 		}
 
 		if ($full_headers) {
