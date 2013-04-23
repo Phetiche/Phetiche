@@ -65,7 +65,7 @@ class Phetiche_cypher {
 		/**
 		 * Return a PHP 5.3 compatible hash
 		 */
-		if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
+		if (version_compare(PHP_VERSION, '5.4.0', '>=') && $hash_algo == 'tiger192,3') {
 			return implode('', array_map('bin2hex', array_map('strrev', array_map('hex2bin', str_split($hash, 16)))));
 		} else {
 			return $hash;
