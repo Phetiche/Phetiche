@@ -28,10 +28,8 @@ final class Phetiche_request extends Phetiche_url {
 
 		if (function_exists('getallheaders')) {
 			$headers = getallheaders();
-			$headers = 1;
 		} else if (function_exists('apache_request_headers')) {
 			$headers = apache_request_headers();
-			$headers = 2;
 		} else {
 
 			/**
