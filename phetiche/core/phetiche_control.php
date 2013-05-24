@@ -38,7 +38,7 @@ final class Phetiche_control {
 		 * Check if the user created a custom URL binding file.
 		 * If so, then use those custom routes before throwing an exception.
 		 */
-		Phetiche_control::routeCustomUrls($controller, $method);
+		Phetiche_control::routeCustomUrls($controller, $method, $req);
 		$controller = ($controller) ? $controller : 'Phetiche_index';
 
 		/**
@@ -186,7 +186,7 @@ final class Phetiche_control {
 	 * @param	string ref. $controller The controller to be used
 	 * @param	string ref. $method The method to be used
 	 */
-	private static function routeCustomUrls(&$controller, &$method)
+	private static function routeCustomUrls(&$controller, &$method, &$req)
 	{
 		if ($app_routes = Phetiche_config::get('app/routes')) {
 
@@ -203,6 +203,8 @@ final class Phetiche_control {
 						if (count($part) == 2) {
 							$controller = $part[0];
 							$method = $part[1];
+							$req->routed_to = array('controller' => $controller, 'method' => $method);
+
 							break;
 						}
 					}

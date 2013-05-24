@@ -151,6 +151,7 @@ class Phetiche_url {
 		$parsed_url['controller'] = (isset($parsed_url['controller'])) ? $parsed_url['controller'] : null;
 		$parsed_url['method'] = (isset($parsed_url['method'])) ? $parsed_url['method'] : null;
 		$parsed_url['request_id'] = (isset($parsed_url['request_id'])) ? $parsed_url['request_id'] : null;
+		$parsed_url['routed_to'] = null;
 
 		/**
 		 * Now that we have a final array on (request) data, we can merge the other
