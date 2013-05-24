@@ -82,7 +82,7 @@ final class Phetiche_app {
 	   	/**
 		 * Start using a DB (if one has been defined in the config file)
 		 */
-		 $valid_engines = array('mysql', 'pgsql', 'cubrid', 'sqlite');
+		 $valid_engines = ['mysql', 'pgsql', 'cubrid', 'sqlite'];
 
 		$db_settings = Phetiche_config::get('db');
 		if ($db_settings && in_array($db_settings['engine'], $valid_engines) ) {

@@ -24,7 +24,7 @@ final class Phetiche_request extends Phetiche_url {
 	 */
 	public static function headers($full_headers = false)
 	{
-		$headers = array();
+		$headers = [];
 
 		if (function_exists('getallheaders')) {
 			$headers = getallheaders();

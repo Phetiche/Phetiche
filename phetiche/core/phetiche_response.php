@@ -31,9 +31,9 @@ class Phetiche_response {
 	 * A set of tamplate operation functions
 	 * @var arra
 	 */
-	private $template_operators = array(
+	private $template_operators = [
 		'render',
-	);
+	];
 
 	/**
 	 * The headers sent along in the response
@@ -87,7 +87,7 @@ class Phetiche_response {
 	 * @param	array $req The data parsed from the request
 	 * @return	void
 	 */
-	public function __construct($invoking_controller = '', $req = array())
+	public function __construct($invoking_controller = '', $req = [])
 	{
 		$this->req = $req;
 		if ($invoking_controller) {
@@ -121,7 +121,7 @@ class Phetiche_response {
 	 * @param	array $args The arguments to be passed to the function
 	 * @see		Phetiche_response->send();
 	 */
-	public function beforeSend($function = null, $args = array())
+	public function beforeSend($function = null, $args = [])
 	{
 		$this->beforeSendFunction = ($function) ? $function : null;
 		$this->beforeSendArguments = $args;
@@ -298,7 +298,7 @@ class Phetiche_response {
 			$this->template->caching = Phetiche_config::get('templates/cache');
 			$this->template->cache_lifetime = Phetiche_config::get('templates/cache_lifetime');
 			if (is_dir($base_path . 'app/modules/smarty')) {
-				$this->template->plugins_dir = array_merge($this->template->plugins_dir, array($base_path . 'app/modules/smarty'));
+				$this->template->plugins_dir = array_merge($this->template->plugins_dir, [$base_path . 'app/modules/smarty']);
 			}
 
 			/**

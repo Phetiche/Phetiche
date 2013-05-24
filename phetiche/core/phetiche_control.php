@@ -192,8 +192,8 @@ final class Phetiche_control {
 
 			if (is_array($app_routes)) {
 
-				$pattern = array('/\//');
-				$replacement = array('\/');
+				$pattern = ['/\//'];
+				$replacement = ['\/'];
 
 				$request_uri = preg_replace('/\/?\?.*/', '', Phetiche_server::REQUEST_URI());
 				foreach ($app_routes as $key => $url) {
@@ -203,7 +203,7 @@ final class Phetiche_control {
 						if (count($part) == 2) {
 							$controller = $part[0];
 							$method = $part[1];
-							$req->routed_to = array('controller' => $controller, 'method' => $method);
+							$req->routed_to = ['controller' => $controller, 'method' => $method];
 
 							break;
 						}

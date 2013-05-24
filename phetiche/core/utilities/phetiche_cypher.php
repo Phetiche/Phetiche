@@ -48,7 +48,7 @@ class Phetiche_cypher {
 		 */
 		$crypt = mcrypt_encrypt(self::$crypt_cypher, $key, $text, self::$crypt_mode, $salt);
 
-		$data = array();
+		$data = [];
 		$data['key'] = Phetiche_format::safeEncode($crypt);
 		$data['token'] = $token;
 		$data['salt'] = Phetiche_format::safeEncode($salt);

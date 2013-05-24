@@ -19,13 +19,13 @@ class Phetiche_url {
 	 * //controller/method
 	 * @var array
 	 */
-	private static $url_components = array('controller', 'method');
+	private static $url_components = ['controller', 'method'];
 
 	/**
 	 * The URI (parts) being loaded
 	 * @var array
 	 */
-	public static $loaded_url = array();
+	public static $loaded_url = [];
 
 	public function __set($name, $value) { $this->{$name} = $value; }
 
@@ -186,10 +186,10 @@ class Phetiche_url {
 			/**
 			 * Map an array of parameters to the method being called
 			 */
-			$args = array();
+			$args = [];
 			if (count($command_call) > 3) {
 				$args = array_slice($command_call, 3, count($command_call));
-				$part['argv'] = array();
+				$part['argv'] = [];
 				if ($args[0] == '-u' && $args[1]) {
 					parse_str($args[1], $part['argv']);
 				} else {
@@ -223,7 +223,7 @@ class Phetiche_url {
 	public static function explodeURL($url = '')
 	{
 		$request_uri = Phetiche_server::REQUEST_URI();
-		$parsed_url = array();
+		$parsed_url = [];
 
 		$query_position = strpos($request_uri, '?');
 		$url = ($url) ? $url : (($query_position) ? substr($request_uri, 0, $query_position) : $request_uri);

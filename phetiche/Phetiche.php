@@ -20,7 +20,7 @@ final class Phetiche {
 	 * The minimum PHP version required to run Phetiche
 	 * @var string
 	 */
-	private $min_php_version = '5.3.3';
+	private $min_php_version = '5.4';
 
 	/**
 	 * The path to the public folder.
@@ -38,19 +38,19 @@ final class Phetiche {
 	 * The directories found for path recursion.
 	 * @var array
 	 */
-	private $dirs_found = array();
+	private $dirs_found = [];
 
 	/**
 	 * On which folders to recurse.
 	 * @var array
 	 */
-	private $locations = array('app', 'phetiche');
+	private $locations = ['app', 'phetiche'];
 
 	/**
 	 * Which folder, whithin top folders, to skip from search/recursion.
 	 * @var array
 	 */
-	private $skip_folders = array();
+	private $skip_folders = [];
 
 	/**
 	 * How many levels deep shall the recursion go. And the current depth.
@@ -64,7 +64,7 @@ final class Phetiche {
 	 * The arguments passed to the command line call.
 	 * @var array
 	 */
-	private $command_args = array();
+	private $command_args = [];
 
 	/**
 	 * Class/object constructor.
@@ -126,7 +126,7 @@ final class Phetiche {
 		 * Try to load the configuration file.
 		 * This file must be present.
 		 */
-		$config = array();
+		$config = [];
 		if (file_exists($this->current_path . 'app/config.inc')) {
 			require_once($this->current_path . 'app/config.inc');
 		} else {
@@ -184,8 +184,8 @@ final class Phetiche {
 	 */
 	private function pheticheck($app_folder)
 	{
-		$required = array('CORE', 'DATE', 'ZLIB', 'GD', 'HASH', 'OPENSSL', 'FILEINFO', 'JSON', 'PDO', 'APC', 'REFLECTION', 'SQLITE', 'SQLITE3', 'MCRYPT');
-		$recommended = array('GD', 'APC', 'PDO', 'SQLITE');
+		$required = ['CORE', 'DATE', 'ZLIB', 'GD', 'HASH', 'OPENSSL', 'FILEINFO', 'JSON', 'PDO', 'APC', 'REFLECTION', 'SQLITE', 'SQLITE3', 'MCRYPT'];
+		$recommended = ['GD', 'APC', 'PDO', 'SQLITE'];
 		$extensions = get_loaded_extensions();
 		array_walk($extensions, function(&$item) { $item = strtoupper($item); });
 
@@ -326,8 +326,7 @@ final class Phetiche {
 	 */
 	private function makeIncludePaths()
 	{
-		$app_modules = array();
-		$final_include_paths = array();
+		$app_modules = $final_include_paths = [];
 
 		foreach ($this->locations as $location) {
 			$this->recursePath($this->current_path . $location . '/', false);
@@ -370,7 +369,7 @@ final class Phetiche {
 	{
 		$path = rtrim($path, "/");
 
-		$dirs = array_diff(scandir($path), array(".", "..", ".DS_Store"));
+		$dirs = array_diff(scandir($path), [".", "..", ".DS_Store"]);
 		if (!$sub_folder) {
 			$this->dirs_found[] = $path;
 		}

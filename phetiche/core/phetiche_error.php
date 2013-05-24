@@ -2,7 +2,7 @@
 
 /**
  * The Phetiche error handler
- * 
+ *
  * @file			phetiche/core/phetiche_error.php
  * @description		The error object. This will handle all errors and failures, hopefully.
  * 					This class extendes the native Exception object in order for it to be able
@@ -10,7 +10,7 @@
  * @author			Stefan Aichholzer <yo@stefan.ec>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
- * 
+ *
  * @todo			Clean code
  * @todo			Document properly
  *
@@ -23,37 +23,37 @@ class Phetiche_error extends Exception {
 	 * Error code and strings definition
 	 * @var array
 	 */
-	private static $phetiche_errors = array('4041' => 'You are trying to load an undefined module.');
+	private static $phetiche_errors = ['4041' => 'You are trying to load an undefined module.'];
 
 	/**
 	 * Generate a nice debug trace from the error stack.
 	 * This very function will not be named in this stack trace, of course. ;)
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @return	array $simple_trace An array with the error trace
 	 */
 	private static function getDebugTrace()
 	{
 		$trace = debug_backtrace();
-		$simple_trace = array();
+		$simple_trace = [];
 		foreach ($trace as $node) {
 			$file = (Phetiche_server::basePath() !== '/') ? str_replace(Phetiche_server::basePath(), '', $node['file']) : $node['file'];
 			if ($node['function'] != 'getDebugTrace') {
-				$simple_trace[] = array('file' => $file, 'line' => $node['line'], 'function' => $node['function']);
+				$simple_trace[] = ['file' => $file, 'line' => $node['line'], 'function' => $node['function']];
 			}
 		}
-		
+
 		return $simple_trace;
 	}
 
 	public static function handler($code, $msg, $file = '', $line = '')
-	{	
-		$throw_errors = array(E_NOTICE, E_ERROR, E_WARNING, E_PARSE);
-		
+	{
+		$throw_errors = [E_NOTICE, E_ERROR, E_WARNING, E_PARSE];
+
 		$error_msg = $msg;
 		if ($file) { $error_msg .= ' in "' . $file . '"'; }
 		if ($line) { $error_msg .= ' at line "' . $line . '"'; }
-		
+
 		if (in_array($code, $throw_errors)) {
 			throw new Phetiche_error($error_msg);
 		} else {
@@ -68,11 +68,11 @@ class Phetiche_error extends Exception {
 	 * Sends the error message or code to the client.
 	 * It makes use of the pre-defined error pages which can be over ruled if custom
 	 * pages are found (in the right location).
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	integer $err The error code being returned
 	 * @return	void
-	 * 
+	 *
 	 * @todo	Implement the use of custom error pages
 	 */
 	public static function send($err)
@@ -87,19 +87,19 @@ class Phetiche_error extends Exception {
 			$page = file_get_contents($base_path . 'phetiche/core/error_pages/'.$err.'.htm');
 			$page = str_replace('<!--home-->', ucfirst(Phetiche_server::SERVER_NAME()), $page);
 			$page = str_replace('<!--url-->', Phetiche_server::REQUEST_URI(), $page);
-			
+
 			$traces = self::getDebugTrace();
 			if (Phetiche_config::get('default/debug')) {
 				$debug_msg = '<h4>Debug trace:</h4><h5>(This should be disabled in production environments)</h5><pre>';
-				
+
 				foreach ($traces as $trace) {
 					$debug_msg .= 'File: ' . $trace['file'] . "\nLine: " .  $trace['line'] . ' | Function: ' . $trace['function'] . "\n\n";
 				}
-				
+
 				$debug_msg .= '</pre>';
 				$page = str_replace('<!--debug-->', $debug_msg, $page);
 			}
- 
+
  			$last_trace = end($traces);
 			self::log($err, $last_trace['file'], $last_trace['line']);
 			print $page;
@@ -114,7 +114,7 @@ class Phetiche_error extends Exception {
 
 	/**
 	 * Logs an error to the error.log file
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	integer $err The error code being logged
 	 * @param	string $file The file which reported the error
@@ -136,7 +136,7 @@ class Phetiche_error extends Exception {
 					$stringData .= "\n";
 
 					fwrite($fh, $stringData);
-					fclose($fh);	
+					fclose($fh);
 				}
 			}
 

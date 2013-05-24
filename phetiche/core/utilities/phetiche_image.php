@@ -2,7 +2,7 @@
 
 /**
  * The Phetiche image processor
- * 
+ *
  * @file			phetiche/core/utilities/phetiche_image.php
  * @description		Does some basic image processing.
  * @author			Stefan Aichholzer <yo@stefan.ec>
@@ -18,18 +18,18 @@ class Phetiche_image {
 	 * All the image to be processed
 	 * @var array
 	 */
-	private $images = array();
+	private $images = [];
 
 	/**
 	 * General image sizes applied to the batch
 	 * @var array
 	 */
-	private $global_sizes = array();
+	private $global_sizes = [];
 
 	/**
 	 * Where to store the images (temporary)
 	 * @var string
-	 */	
+	 */
 	private $global_store_path = null;
 
 	/**
@@ -53,10 +53,10 @@ class Phetiche_image {
 
 	/**
 	 * Renders (or returns) a simple image on the fly.
-	 * 
+	 *
 	 * If $html_tag = false then the image object will be returned, in which case the proper
 	 * header -header('Content-Type: image/png');- must be send on the delivery end point.
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param 	integer $width The width of the image
 	 * @param 	integer $height The height of the image
@@ -75,7 +75,7 @@ class Phetiche_image {
 		if (!$width || !$height || !$text) {
 			return false;
 		}
-			
+
 		if (!$image = imagecreate($width, $height)) {
 			throw new Phetiche_error('Cannot initialize image stream.');
 		}
@@ -83,7 +83,7 @@ class Phetiche_image {
 		// Set the background color
 		list($red, $green, $black) = explode(':', $bg_color);
 		$background_color = imagecolorallocate($image, $red, $green, $black);
-			
+
 		// Set the text color
 		list($red, $green, $black) = explode(':', $text_color);
 		$text_color = imagecolorallocate($image, $red, $green, $black);
@@ -96,7 +96,7 @@ class Phetiche_image {
 		$image_object = ob_get_contents();
 		imagedestroy($image);
 		ob_end_clean();
-		
+
 		if ($html_tag) {
 			$image = 'data:image/png;base64,' . base64_encode($image_object);
 			return '<img width="' . $width . '" height="' . $height . '" src="' . $image . '" />';
@@ -109,7 +109,7 @@ class Phetiche_image {
 
 	/**
 	 * Inputs an image to be processed from a local resource.
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	string $name The name of the input image.
 	 * @param 	string $filename The filename (path) of the input image.
@@ -120,7 +120,7 @@ class Phetiche_image {
 		if ($name && $filename) {
 			$output_name = Phetiche_cypher::randomCode(microtime(true));
 			$this->current = $output_name;
-			$this->images[$this->current] = array('name' => basename($name), 'file' => $filename, 'output_name' => $output_name);
+			$this->images[$this->current] = ['name' => basename($name), 'file' => $filename, 'output_name' => $output_name];
 		}
 
 		return $this;
@@ -130,7 +130,7 @@ class Phetiche_image {
 	 * Inputs an (URL) image to be processed.
 	 * The image will be downloaded to the /tmp folder (or where specified)
 	 * and be processed from there.
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	string $url The URL to the final image.
 	 * @param 	string $temp_path The temporary path where to store the image.
@@ -158,7 +158,7 @@ class Phetiche_image {
 			}
 
 			$this->current = $temp_name;
-			$this->images[$this->current] = array('name' => $temp_name, 'file' => $temp_path, 'output_name' => $temp_name);
+			$this->images[$this->current] = ['name' => $temp_name, 'file' => $temp_path, 'output_name' => $temp_name];
 		}
 
 		return $this;
@@ -167,7 +167,7 @@ class Phetiche_image {
 
 	/**
 	 * Define the output arguments for an image, one at a time.
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	integer $width The disired width.
 	 * @param 	integer $height The desired height.
@@ -181,8 +181,8 @@ class Phetiche_image {
 		if (!isset($this->images[$this->current])) {
 			throw new Phetiche_error(5003);
 		}
-		
-		$image_data = array('width' => $width, 'height' => $height, 'lock' => $lock, 'extension' => str_replace('.', '', $extension), 'quality' => $quality);
+
+		$image_data = ['width' => $width, 'height' => $height, 'lock' => $lock, 'extension' => str_replace('.', '', $extension), 'quality' => $quality];
 		$this->images[$this->current]['sizes'][] = $image_data;
 
 		return $this;
@@ -191,7 +191,7 @@ class Phetiche_image {
 
 	/**
 	 * Define the output arguments for an image, applied to all images.
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	mixed, string|array $sizes The disired sizes to be applied.
 	 * @param	boolean $lock Should the resize process be locked or not (See above).
@@ -209,7 +209,7 @@ class Phetiche_image {
 		if ($sizes) {
 			foreach ($sizes as $size) {
 				list($width, $height) = explode('x', strtolower(trim($size)));
-				$image_data = array('width' => $width, 'height' => $height, 'lock' => $lock, 'extension' => str_replace('.', '', $extension), 'quality' => $quality);
+				$image_data = ['width' => $width, 'height' => $height, 'lock' => $lock, 'extension' => str_replace('.', '', $extension), 'quality' => $quality];
 
 				$this->global_sizes[] = $image_data;
 			}
@@ -233,33 +233,33 @@ class Phetiche_image {
 
 	/**
 	 * Applies all changes to the images in the image stack
-	 * 
+	 *
 	 * Resize process is applied as follows:
-	 * 
+	 *
 	 * $size['width'] && !$size['height'] && !$size['lock']
 	 *  Resizes the image to the given width. Maintains the aspect ratio.
-	 * 
+	 *
 	 * !$size['width'] && $size['height'] && !$size['lock']
 	 *  Resizes the image to the given height. Maintains the aspect ratio.
 	 *
 	 * $size['width'] && $size['height'] && !$size['lock']
 	 *  Resizes the image to the given width and height. Does not maintains the aspect ratio.
 	 *  (Image will be distorted)
-	 * 
+	 *
 	 * $size['width'] && $size['height'] && $size['lock']
-	 *  Resizes the image to the given width and height, maintaining the aspect ratio, 
+	 *  Resizes the image to the given width and height, maintaining the aspect ratio,
 	 *  so that the smallest side equals the given width or height.
 	 *  It will crop the remains of the largest side.
 	 *
 	 * @author Stefan Aichholzer <yo@stefan.ec>
 	 * @return mixed: array|string $result The image name or array of image names.
 	 * 		   An array is returned if more than one image is processed.
-	 * 
+	 *
 	 * @todo Apply the global settings
 	 */
 	public function apply()
 	{
-		$image_names = array();
+		$image_names = [];
 
 		foreach ($this->images as $image) {
 
@@ -295,7 +295,7 @@ class Phetiche_image {
 					$final_size = 'original';
 					$crop = false;
 				} else {
-				
+
 					$final_output = $store_folder . $size['width'] .'x'. $size['height'] . '_' . $image['output_name'] .'.'. $size['extension'];
 					$final_size = $size['width'] .'x'. $size['height'];
 
@@ -307,21 +307,21 @@ class Phetiche_image {
 						$crop = false;
 					}
 				}
-				
+
 				if (!$this->process($image['file'], $final_output, $size['width'], $size['height'], $crop, $size['extension'], $size['quality'])) {
 					throw new Phetiche_error(5004);
 				}
 
-				$image_names[$image['output_name'] . '.' . $size['extension']][] = array('size' => $final_size, 
-																						 'width' => $size['width'], 
-																						 'heigth' => $size['height'], 
-																						 'name' => $image['output_name'], 
-																						 'extension' => $size['extension'], 
-																						 'path' => $final_output);
+				$image_names[$image['output_name'] . '.' . $size['extension']][] = ['size' => $final_size,
+																					'width' => $size['width'],
+																					'heigth' => $size['height'],
+																					'name' => $image['output_name'],
+																					'extension' => $size['extension'],
+																					'path' => $final_output];
 			}
 		}
 
-		$this->images = array();
+		$this->images = [];
 		return $image_names;
 	}
 
@@ -368,7 +368,7 @@ class Phetiche_image {
 				 *
 				 * Since the image is resized while ratio is maintained, it could be possible
 				 * that the resulting width or height is less than the actual desired output width or height.
-				 * In either case the height and width, respectively, needs to be increased 
+				 * In either case the height and width, respectively, needs to be increased
 				 * (and cropped) to accomodate the full width or height.
 				 */
 				if ($image_properties[0] > $image_properties[1]) {
@@ -421,19 +421,19 @@ class Phetiche_image {
 		switch ($image_properties[2]) {
 			case IMAGETYPE_GIF: $img_obj = ImageCreateFromGIF($input);
 				break;
-			
+
 			case IMAGETYPE_JPEG: $img_obj = ImageCreateFromJPEG($input);
 				break;
-			
+
 			case IMAGETYPE_PNG: $img_obj = ImageCreateFromPNG($input);
 				break;
-			
+
 			case IMAGETYPE_WBMP: $img_obj = ImageCreateFromWBMP($input);
 				break;
-			
+
 			case IMAGETYPE_XBM: $img_obj = ImageCreateFromXBM($input);
 				break;
-				
+
 			default: $img_obj = null;
 		}
 
@@ -442,7 +442,7 @@ class Phetiche_image {
 		} else {
 			$thumb = ImageCreateTrueColor($output_width, $output_height);
 			ImageCopyResampled($thumb, $img_obj, -$crop_to_width, -$crop_to_height, 0, 0, $width, $height, $image_properties[0], $image_properties[1]);
-			
+
 			/**
 			 * Create the proper image based on the extension given.
 			 * Since for .png the quality must range from 0 to 9, apply
@@ -472,7 +472,7 @@ class Phetiche_image {
 	/**
 	 * Calculate a difference in percent between two numbers.
 	 * Used in this case to increase the size of an output image.
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	integer $big_value The large value.
 	 * @param	integer $small_value The small value.
@@ -488,7 +488,7 @@ class Phetiche_image {
 	/**
 	 * Calculate the amount of pixels the image needs to be shifted (to the left)
 	 * in order to fully accomodate it in the output (desired) image.
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	integer ref $width The output width (will vary from the original)
 	 * @param	integer ref $output_width The output width (the original)
@@ -508,20 +508,20 @@ class Phetiche_image {
 	/**
 	 * Calculate the amount of pixels the image needs to be shifted (to the top)
 	 * in order to fully accomodate it in the output (desired) image.
-	 * 
+	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @param	integer ref $height The output height (will vary from the original)
 	 * @param	integer ref $output_height The output height (the original)
 	 * @param	integer $width The output width
 	 * @param	array $properties The image properties (width and height)
 	 * @return	integer The number of pixels to shift the image.
-	 */	
+	 */
 	private function getCropHeight(&$height, $output_height, $width, $properties)
 	{
 		$height = (100 / ($properties[0] / $width)) * 0.01;
 		$height = round ($properties[1] * $height);
 
-		return ($height - $output_height) / 2;		
+		return ($height - $output_height) / 2;
 	}
 
 }
