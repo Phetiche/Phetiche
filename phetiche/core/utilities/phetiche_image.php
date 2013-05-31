@@ -417,53 +417,27 @@ class Phetiche_image {
 			$crop_to_height = ($height - $output_height) / 2;
 		}
 
-		// Create an image from the proper source type
-		switch ($image_properties[2]) {
-			case IMAGETYPE_GIF: $img_obj = ImageCreateFromGIF($input);
-				break;
+		$new_properties = [
+			'height' => $height,
+			'width' => $width,
+			'output_height' => $output_height,
+			'output_width' => $output_width,
+			'crop_to_height' => $crop_to_height,
+			'crop_to_width' => $crop_to_width,
+			'extension' => $extension,
+			'quality' => $quality
+		];
 
-			case IMAGETYPE_JPEG: $img_obj = ImageCreateFromJPEG($input);
-				break;
+		try {
 
-			case IMAGETYPE_PNG: $img_obj = ImageCreateFromPNG($input);
-				break;
-
-			case IMAGETYPE_WBMP: $img_obj = ImageCreateFromWBMP($input);
-				break;
-
-			case IMAGETYPE_XBM: $img_obj = ImageCreateFromXBM($input);
-				break;
-
-			default: $img_obj = null;
-		}
-
-		if (!$img_obj) {
-			return false;
-		} else {
-			$thumb = ImageCreateTrueColor($output_width, $output_height);
-			ImageCopyResampled($thumb, $img_obj, -$crop_to_width, -$crop_to_height, 0, 0, $width, $height, $image_properties[0], $image_properties[1]);
-
-			/**
-			 * Create the proper image based on the extension given.
-			 * Since for .png the quality must range from 0 to 9, apply
-			 * a simple conversion to get the correct value from the original input (0 - 100)
-			 */
-			switch ($extension) {
-				case 'png': $quality = ceil(($quality * 9) / 100);
-							imagepng($thumb, $output, $quality); break;
-
-				case 'gif': imagegif($thumb, $output); break;
-
-				case 'bmp': imagewbmp($thumb, $output); break;
-
-				case 'jpg':
-				default: imagejpeg($thumb, $output, $quality);
+			if (extension_loaded('imagick')) {
+				return $this->processImageMagick($input, $output, $image_properties, $new_properties);
+			} else {
+				return $this->processGD($input, $output, $image_properties, $new_properties);
 			}
 
-			imagedestroy($img_obj);
-			imagedestroy($thumb);
-
-			return true;
+		} catch (Exception $e) {
+			echo $e->getMessage();
 		}
 
 	}
@@ -490,8 +464,8 @@ class Phetiche_image {
 	 * in order to fully accomodate it in the output (desired) image.
 	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
-	 * @param	integer ref $width The output width (will vary from the original)
-	 * @param	integer ref $output_width The output width (the original)
+	 * @param	integer $width (ref.) The output width (will vary from the original)
+	 * @param	integer $output_width The output width (the original)
 	 * @param	integer $height The output height
 	 * @param	array $properties The image properties (width and height)
 	 * @return	integer The number of pixels to shift the image.
@@ -510,8 +484,8 @@ class Phetiche_image {
 	 * in order to fully accomodate it in the output (desired) image.
 	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
-	 * @param	integer ref $height The output height (will vary from the original)
-	 * @param	integer ref $output_height The output height (the original)
+	 * @param	integer $height (ref.) The output height (will vary from the original)
+	 * @param	integer $output_height The output height (the original)
 	 * @param	integer $width The output width
 	 * @param	array $properties The image properties (width and height)
 	 * @return	integer The number of pixels to shift the image.
@@ -522,6 +496,118 @@ class Phetiche_image {
 		$height = round ($properties[1] * $height);
 
 		return ($height - $output_height) / 2;
+	}
+
+
+	/**
+	 * Process images using the GD extension.
+	 * This extension cannot handle larger files.
+	 *
+	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @param	object $input_image The original image object
+	 * @param	string $output The filename of the image to output
+	 * @param	array $image_properties The original image properties
+	 * @param	array $new_properties The new image (expected) properties
+	 * @return	boolean Successful process or not.
+	 */
+	private function processGD($input_image, $output, $image_properties, $new_properties)
+	{
+		// Create an image from the proper source type
+		$img_obj = null;
+		switch ($image_properties[2]) {
+			case IMAGETYPE_GIF: $img_obj = ImageCreateFromGIF($input_image);
+				break;
+
+			case IMAGETYPE_JPEG: $img_obj = ImageCreateFromJPEG($input_image);
+				break;
+
+			case IMAGETYPE_PNG: $img_obj = ImageCreateFromPNG($input_image);
+				break;
+
+			case IMAGETYPE_WBMP: $img_obj = ImageCreateFromWBMP($input_image);
+				break;
+
+			case IMAGETYPE_XBM: $img_obj = ImageCreateFromXBM($input_image);
+				break;
+		}
+
+		if (!$img_obj) {
+			return false;
+		} else {
+			$thumb = ImageCreateTrueColor($new_properties['output_width'], $new_properties['output_height']);
+			ImageCopyResampled($thumb, $img_obj, -$new_properties['crop_to_width'], -$new_properties['crop_to_height'], 0, 0, $new_properties['width'], $new_properties['height'], $image_properties[0], $image_properties[1]);
+
+			/**
+			 * Create the proper image based on the extension given.
+			 * Since for .png the quality must range from 0 to 9, apply
+			 * a simple conversion to get the correct value from the original input (0 - 100)
+			 */
+			switch ($new_properties['extension']) {
+				case 'png':
+					imagepng($thumb, $output, ceil(($new_properties['quality'] * 9) / 100));
+					break;
+
+				case 'gif':
+					imagegif($thumb, $output);
+					break;
+
+				case 'bmp':
+					imagewbmp($thumb, $output);
+					break;
+
+				case 'jpg':
+				default:
+					imagejpeg($thumb, $output, $new_properties['quality']);
+			}
+
+			imagedestroy($img_obj);
+			imagedestroy($thumb);
+
+			return true;
+		}
+
+
+	}
+
+
+	/**
+	 * Process images using the ImageMagick extension.
+	 * This extension is able to handle very large files and should be preferred.
+	 *
+	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @param	object $input_image The original image object
+	 * @param	string $output The filename of the image to output
+	 * @param	array $image_properties The original image properties
+	 * @param	array $new_properties The new image (expected) properties
+	 * @return	boolean Successful process or not.
+	 */
+	private function processImageMagick($input_image, $output, $image_properties, $new_properties)
+	{
+		$image = new Imagick($input_image);
+		$image->cropThumbnailImage($new_properties['output_width'], $new_properties['output_height']);
+		$image->thumbnailImage($new_properties['width'], $new_properties['height'], true);
+
+		switch ($new_properties['extension']) {
+			case 'png':
+				$image->setImageFormat('png');
+				break;
+
+			case 'gif':
+				$image->setImageFormat('gif');
+				break;
+
+			case 'bmp':
+				$image->setImageFormat('bmp');
+				break;
+
+			case 'jpg':
+			default:
+				$image->setImageFormat('jpg');
+		}
+
+		$image->writeImage($output);
+
+		return true;
 	}
 
 }

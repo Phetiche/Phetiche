@@ -23,9 +23,30 @@ class Phetiche_index extends Phetiche_BASIC_Controller {
 	 */
 	public function index()
 	{
+
+		$image = new Phetiche_image();
+		$image_names = $image
+			->input('parent.png', '/Users/Stefan/Sites/Development/XX/Snake_River_(5mb).jpg')
+			->output(1000, 1000, false)
+			->output(960, 640, true)
+			->output(720, 500, false)
+			->output(360, 280, true)
+			->destination('/Users/Stefan/Sites/Development/XX/')
+			->apply();
+
+		Phetiche_format::tree($image_names);
+
+		return false;
+
+
+
+
+
+		/*
 		Phetiche_format::tree($this->req->test);
 		$this->res->render('demo', array('content' => 'render|content', 'footer' => 'render|footer', 'name' => 'strtoupper|Stefan'));
 		exit();
+		*/
 
 		//echo Phetiche_server::DOCUMENT_ROOT();
 		//Phetiche_format::tree(Phetiche_config::dump());

@@ -25,7 +25,7 @@
 	$config['db']['name'] = 'database';
 
 	// URL routing (even more) settings
-	$config['app']['routes'] = array('/empty/spaces.*' => '/basic/index');
+	$config['app']['routes'] = array('/sample/war/' => '/basic/index');
 
 
 	/**
