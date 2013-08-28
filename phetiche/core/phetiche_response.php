@@ -253,6 +253,7 @@ class Phetiche_response {
 
 	/**
 	 * Format (and print) the output to match the text/html Content-Type
+	 * (if possible)
 	 *
 	 * @author	Stefan Aichholzer <yo@stefan.ec>
 	 * @return	void
@@ -260,7 +261,9 @@ class Phetiche_response {
 	private function formatTexthtml()
 	{
 		if (is_array($this->response_body)) {
-			array_walk($this->response_body, function($item, $key) { print ucfirst($key) . ': ' . $item . '<br />'; });
+			array_walk($this->response_body, function($item, $key) {
+				echo print_r($item, true) . '<br />';
+			});
 		} else {
 			print $this->response_body;
 		}
