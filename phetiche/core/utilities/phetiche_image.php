@@ -38,6 +38,13 @@ class Phetiche_image {
 	 */
 	private $current = '';
 
+	/**
+	 * Should the computed size be part of the name of the
+	 * image once stored in the final path?
+	 * @var bool
+	 */
+	public $storeSizeInPath = true;
+
 
 	/**
 	 * Class/object constructor.
@@ -291,12 +298,14 @@ class Phetiche_image {
 				 * The original image will be converted to JPG but not scaled nor cropped.
 				 */
 				if ($size['width'] == 'original') {
-        			$final_output = $store_folder . 'original_' . $image['output_name'] .'.'. $size['extension'];
+					$imageSizes = ($this->storeSizeInPath) ? 'original_' : '';
+					$final_output = $store_folder . $imageSizes . $image['output_name'] .'.'. $size['extension'];
 					$final_size = 'original';
 					$crop = false;
 				} else {
 
-					$final_output = $store_folder . $size['width'] .'x'. $size['height'] . '_' . $image['output_name'] .'.'. $size['extension'];
+					$imageSizes = ($this->storeSizeInPath) ? $size['width'] .'x'. $size['height'] . '_' : '';
+					$final_output = $store_folder . $imageSizes . $image['output_name'] .'.'. $size['extension'];
 					$final_size = $size['width'] .'x'. $size['height'];
 
 					if ($size['width'] && !$size['height'] && !$crop) {
@@ -313,11 +322,11 @@ class Phetiche_image {
 				}
 
 				$image_names[$image['output_name'] . '.' . $size['extension']][] = ['size' => $final_size,
-																					'width' => $size['width'],
-																					'heigth' => $size['height'],
-																					'name' => $image['output_name'],
-																					'extension' => $size['extension'],
-																					'path' => $final_output];
+					'width' => $size['width'],
+					'height' => $size['height'],
+					'name' => $image['output_name'],
+					'extension' => $size['extension'],
+					'path' => $final_output];
 			}
 		}
 
@@ -338,12 +347,12 @@ class Phetiche_image {
 		/**
 		 * Get the properties for the current image
 		 * Array (
-    	 *   [0] => 1680	// Width
-    	 *   [1] => 1050	// Height
-    	 *   [2] => 2		// Image type
-    	 *   [3] => width="1680" height="1050"
-    	 *   [bits] => 8
-    	 *   [channels] => 3
+		 *   [0] => 1680	// Width
+		 *   [1] => 1050	// Height
+		 *   [2] => 2		// Image type
+		 *   [3] => width="1680" height="1050"
+		 *   [bits] => 8
+		 *   [channels] => 3
 		 *   [mime] => image/jpeg
 		 * )
 		 */
