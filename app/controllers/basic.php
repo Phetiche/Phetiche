@@ -15,7 +15,7 @@ class basic extends Phetiche_BASIC_Controller {
 	 */
 	public function index()
 	{
-		Phetiche_format::tree($this->req);
+		format::tree($this->req);
 	}
 
 

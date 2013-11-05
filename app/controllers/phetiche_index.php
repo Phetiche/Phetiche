@@ -23,7 +23,7 @@ class Phetiche_index extends Phetiche_BASIC_Controller {
 	 */
 	public function index()
 	{
-
+		/*
 		$image = new Phetiche_image();
 		$image_names = $image
 			->input('parent.png', '/Users/Stefan/Sites/Development/XX/Snake_River_(5mb).jpg')
@@ -34,22 +34,22 @@ class Phetiche_index extends Phetiche_BASIC_Controller {
 			->destination('/Users/Stefan/Sites/Development/XX/')
 			->apply();
 
-		Phetiche_format::tree($image_names);
+		format::tree($image_names);
 
 		return false;
-
+		*/
 
 
 
 
 		/*
-		Phetiche_format::tree($this->req->test);
+		format::tree($this->req->test);
 		$this->res->render('demo', array('content' => 'render|content', 'footer' => 'render|footer', 'name' => 'strtoupper|Stefan'));
 		exit();
 		*/
 
 		//echo Phetiche_server::DOCUMENT_ROOT();
-		//Phetiche_format::tree(Phetiche_config::dump());
+		//format::tree(Phetiche_config::dump());
 
 		//echo 'I am the default responder. <br />';
 
@@ -57,13 +57,13 @@ class Phetiche_index extends Phetiche_BASIC_Controller {
 		 * The request and response objects are available here as well.
 		 * Request arguments can be read and responses can be sent.
 		 */
-		//Phetiche_format::tree($this->req);
+		//format::tree($this->req);
 
 		// Create a simple image
-		$image = new Phetiche_image();
+		$image = new image();
 		echo $image->render(195, 30, 'Welcome to my world!', 5, 10, 7, '0:41:93', '107:179:101', 1, true) . '<br /><br />';
 
-		$image = new Phetiche_image();
+		$image = new image();
 		echo $image->render(195, 30, 'Another image...', 5, 10, 7, '107:179:101', '0:41:93', 1, true) . '<br /><br />';
 
 		// Get the GET arguments
@@ -73,12 +73,12 @@ class Phetiche_index extends Phetiche_BASIC_Controller {
 		echo 'I am c: '. $this->req->c . '<br \>';
 		echo 'I am a: '. Phetiche_request::load()->a . '<br \><br />';
 
-		//echo Phetiche_format::tree($this->req);
+		//echo format::tree($this->req);
 
 		//$auth = Phetiche_module::load('auth');
 		//$auth->login('stefan', 'password');
 
-		//$this->res->render('demo');
+		$this->res->render('demo');
 
 		$nn = Phetiche_module::load('basket', $this->req, $this->res);
 		$nn->points = 5;

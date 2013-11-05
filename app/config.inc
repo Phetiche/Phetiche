@@ -8,21 +8,12 @@
 	$config['default']['apc_cache'] = false;
 
 	// Templating engine settings
-	$config['templates']['path'] = 'app/views/';
-	$config['templates']['compiled'] = 'app/views/compiled/';
-	$config['templates']['cache'] = 'app/views/cache/';
+	$config['templates']['path'] = 'public/views/';
+	$config['templates']['compiled'] = 'public/views/compiled/';
+	$config['templates']['cache'] = 'public/views/cache/';
 	$config['templates']['debug'] = false;
 	$config['templates']['cache'] = false;
 	$config['templates']['cache_lifetime'] = 120;
-
-	// Database settings
-	// See http://redbeanphp.com/manual/freeze
-	$config['db']['freeze'] = true;
-	$config['db']['engine'] = false;
-	$config['db']['user'] = 'username';
-	$config['db']['pass'] = 'password';
-	$config['db']['host'] = 'host';
-	$config['db']['name'] = 'database';
 
 	// URL routing (even more) settings
 	$config['app']['routes'] = array('/sample/war/' => '/basic/index');
@@ -32,6 +23,15 @@
 	 * Custom (application specific settings)
 	 * should (could) go below this point.
 	 */
+
+	// Database settings
+	// See http://redbeanphp.com/manual/freeze
+	$config['db']['freeze'] = true;
+	$config['db']['engine'] = false;
+	$config['db']['user'] = 'username';
+	$config['db']['pass'] = 'password';
+	$config['db']['host'] = 'host';
+	$config['db']['name'] = 'database';
 
 	$config['your_variable'] = 'Your value';
 	$config['your_section']['your_variable'] = 'Your value';

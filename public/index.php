@@ -1,7 +1,5 @@
 <?php
 
-	//xhprof_enable();
-
 	/**
 	 * For command line help (application related) enter 'helpme'
 	 * in the command line call: "php -f path_to_file/index.php helpme
@@ -20,16 +18,3 @@
 	 */
 
 	new Phetiche_app();
-
-/*
-	$xhprof_data = xhprof_disable();
-
-	$XHPROF_ROOT = realpath(dirname(__FILE__) . '/..');
-	include_once $XHPROF_ROOT . '/xhprof/xhprof_lib/utils/xhprof_lib.php';
-	include_once $XHPROF_ROOT . '/xhprof/xhprof_lib/utils/xhprof_runs.php';
-
-	$xhprof_runs = new XHProfRuns_Default();
-	$run_id = $xhprof_runs->save_run($xhprof_data, "xhprof_phetiche");
-
-	echo "<p>&nbsp;</p><a target='_blank' href='http://profiler.local/index.php?run=$run_id&source=xhprof_phetiche'>http://profile/index.php?run=$run_id&source=xhprof_phetiche</a>";
-*/

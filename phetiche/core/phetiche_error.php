@@ -59,7 +59,7 @@ class Phetiche_error extends Exception {
 		} else {
 			echo $error_msg;
 			if (Phetiche_config::get('default/debug')) {
-				Phetiche_format::tree(self::getDebugTrace(), "Debug trace:\n");
+				format::tree(self::getDebugTrace(), "Debug trace:\n");
 			}
 		}
 	}

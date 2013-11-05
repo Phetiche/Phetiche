@@ -281,16 +281,6 @@ final class Phetiche {
 			}
 			echo '<div class="'.$class.'">PHP magic quotes should be off'.$status.'</div>';
 
-			// PHP XHProfiler
-			$class = 'ok';
-			$status = '<span>✔</span>';
-			if (!function_exists('xhprof_enable')) {
-				$class = 'rec';
-				$status = ' (Recommended)';
-			}
-			echo '<div class="'.$class.'">PHP XHProf'.$status.'</div>';
-
-
 			// Extensions
 			foreach ($required as $req) {
 				$class = 'ok';
