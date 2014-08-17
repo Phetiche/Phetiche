@@ -5,9 +5,9 @@
  *
  * @file			Phetiche.php
  * @description		Phetiche core component and handler.
- *					This class/file is the only file included in the inde.php page, it
+ *					This class/file is the only file included in the index.php page, it
  * 					takes care of instantiating everything which is needed.
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche
  * @license			BSD/GPLv2
  *
@@ -69,7 +69,7 @@ final class Phetiche {
 	/**
 	 * Class/object constructor.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	array $argv The arguments passed to the app (in command line call)
 	 * @see		makeIncludePaths();
 	 * @see		handleCommandCall();
@@ -162,7 +162,7 @@ final class Phetiche {
 	/**
 	 * Class/object destructor.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @return	void
 	 */
 	public function __destruct()
@@ -176,7 +176,7 @@ final class Phetiche {
 	 * all required and optional extensions are loaded.
 	 * It also check for the basic required files.
 	 *
-	 * @author Stefan Aichholzer <yo@stefan.ec>
+	 * @author Stefan Aichholzer <play@analogbird.com>
 	 * @param String $app_folder The path to the /app folder.
 	 * @see get_loaded_extensions();
 	 * @see version_compare();
@@ -309,7 +309,7 @@ final class Phetiche {
 	 * $app_modules is currently not used in the app but
 	 * it is collected anyway. Maybe we can use it in the future.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @see		recursePath();
 	 * @see		autoLoader();
 	 * @return	array $app_modules The modules found for this app
@@ -349,7 +349,7 @@ final class Phetiche {
 	/**
 	 * Recurse each path (folder) to make use of files within.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $path The path to be recursed
 	 * @param	boolean $sub_folder If subfolders are to be recursed as well
 	 * @see		recursePath();
@@ -380,7 +380,7 @@ final class Phetiche {
 	/**
 	 * Autoload the requested resource.
 	 *
-	 * @author Stefan Aichholzer <yo@stefan.ec>
+	 * @author Stefan Aichholzer <play@analogbird.com>
 	 * @param String $class_name The name of the class (file) being requested
 	 * @see	Phetiche_error();
 	 * @throw Phetiche_error() This will result in a 404 error rendered to the response.

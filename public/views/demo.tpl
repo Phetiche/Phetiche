@@ -3,7 +3,7 @@
 	<title>Hook test</title>
 	<link rel="stylesheet" href="/static/css/demo.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
-	
+
 </head>
 <body>
 
@@ -25,15 +25,15 @@
 
 	{$name|powerball}
 	{$footer}
-	
+
 	<script>
-	
+
 		(function() {
-		
+
 			var max_size = 100; // IN Kb
-		
+
 			$("#file").change(function() {
-				
+
 				if (!this.files) {
 					alert("This browser doesn't seem to support the files property.");
 				} else {
@@ -44,11 +44,11 @@
 					}
 
 				}
-				
+
 			});
 		})();
 
 	</script>
-	
+
 
 </body>

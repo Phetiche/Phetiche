@@ -6,7 +6,7 @@
  * @file			phetiche/core/phetiche_control.php
  * @description		The control object. This will handle all requests and instantiate
  * 					the corresponding objects. This object also does object (APC) catching.
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
  *
@@ -23,7 +23,7 @@ final class Phetiche_control {
 	 * but is it passed into it anyway. Maybe one day it makes us happy that it
 	 * is around here. ;)
 	 *
-	 * @author Stefan Aichholzer <yo@stefan.ec>
+	 * @author Stefan Aichholzer <play@analogbird.com>
 	 * @param string $controller The controller being called
 	 * @param string $method The method being called
 	 * @param array $req Any arguments passed to the call (command line)
@@ -159,7 +159,7 @@ final class Phetiche_control {
 	 * It also puts the object in the APC cache, if it's not
 	 * already stored there.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $controller The name of the controller being loaded
 	 * @return	object The loaded controller
 	 */
@@ -182,7 +182,7 @@ final class Phetiche_control {
 	 * These custom URLs should be defined in the app/config.inc
 	 * file in the app/routes section.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string ref. $controller The controller to be used
 	 * @param	string ref. $method The method to be used
 	 */

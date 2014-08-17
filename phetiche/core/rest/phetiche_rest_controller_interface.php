@@ -2,10 +2,10 @@
 
 /**
  * REST controller interface
- * 
+ *
  * @file			phetiche/core/rest/phetiche_rest_controller_interface.php
  * @description		The interface (definition) for the REST controller.
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core/rest
  * @license			BSD/GPLv2
  *
@@ -17,7 +17,7 @@ interface Phetiche_REST_Controller_Interface {
 	/**
 	 * Remove variables and references
 	 *
-	 * @author Stefan Aichholzer <yo@stefan.ec>
+	 * @author Stefan Aichholzer <play@analogbird.com>
 	 * @return void
 	 */
 	public function tearDown();
@@ -25,7 +25,7 @@ interface Phetiche_REST_Controller_Interface {
 	/**
 	 * Load the request arguments and the response into the current object.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	Phetiche_request $req The request
 	 * @param	Phetiche_response $res The response
 	 */

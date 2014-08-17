@@ -5,7 +5,7 @@
  *
  * @file			phetiche/core/phetiche_request.php
  * @description		The request object. This will handle the request (arguments, methods, input, etc.).
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
  *
@@ -18,7 +18,7 @@ final class Phetiche_request extends Phetiche_url {
 	 * Request headers
 	 * Extract all headers sent in any request.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	boolean $full_headers Return the full headers
 	 * @return	array $headers The headers obtained from the request
 	 */
@@ -65,7 +65,7 @@ final class Phetiche_request extends Phetiche_url {
 	 * Get header
 	 * Extract a single header from the request.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $header The name of the header to be fetched
 	 * @return	mixed The header found. (Boolean) false if not found
 	 */
@@ -82,7 +82,7 @@ final class Phetiche_request extends Phetiche_url {
 	 * requests.
 	 * See the inline documentation for more details.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	object $data The object containing the input (request)
 	 * @param	boolean $get_only If only GET requests are to be processed
 	 * @return	array The data read from the request

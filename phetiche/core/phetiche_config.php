@@ -5,7 +5,7 @@
  *
  * @file			phetiche/core/phetiche_config.php
  * @description		The configuration object.
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
  *
@@ -26,7 +26,7 @@ final class Phetiche_config {
 	 * Will load the configuration array into the object
 	 * so it can be used throughout the entire application.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	array $config The configuration being loaded.
 	 * @see		set();
 	 * @see		get();
@@ -46,7 +46,7 @@ final class Phetiche_config {
 	 *
 	 * This function also returns any item from the nested structure.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $path The path describing the nested structure.
 	 * @param	mixed $value The value to be set in the array. If (boolean) false then the value is fetched.
 	 * @return	mixed Array of found records. Boolean (false) if not found.
@@ -86,7 +86,7 @@ final class Phetiche_config {
 	 * Get a configuration variable
 	 * Returns any item from the current configuration.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @see		set_getArray();
 	 * @param	string $name The name of the element to be fetched.
 	 * @return	mixed(bool|string) The element found. (Boolean) false if not found.
@@ -105,7 +105,7 @@ final class Phetiche_config {
 	 * Set a configuration variable
 	 * Sets an element in the current configuration.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @see		set_getArray();
 	 * @param	string $name The name of the element to be set.
 	 * @param	mixed $value The value to be set.
@@ -125,7 +125,7 @@ final class Phetiche_config {
 	 * Merge configuration
 	 * Merge an array into the existing configuration
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	array $extra_config The array to be merged.
 	 * @param	mixed $value The value to be set.
 	 * @return	boolean false on error.
@@ -137,22 +137,6 @@ final class Phetiche_config {
 		}
 
 		self::$configvars = array_merge(self::$configvars, $extra_config);
-	}
-
-
-	/**
-	 * Get all configuration variables
-	 * Returns all items from the current configuration.
-	 * This is nice in times when we are lost and we no longer know
-	 * what is where (in the config)
-	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
-	 * @see		set_getArray();
-	 * @return	array The complete configuration set.
-	 */
-	public static function dump()
-	{
-		return self::$configvars;
 	}
 
 }

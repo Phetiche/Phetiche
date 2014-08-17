@@ -5,7 +5,7 @@
  *
  * @file			phetiche/core/phetiche_url.php
  * @description		The URL (URI) object. This will handle anything related to the URI.
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
  *
@@ -66,7 +66,7 @@ class Phetiche_url {
 	 * Class/object destructor.
 	 * Unset the object itself
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @return	void
 	 */
 	public function __destruct()
@@ -78,7 +78,7 @@ class Phetiche_url {
 	 * Create an instance of "itself" for
 	 * overall use as an object.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $url	The URL to be processed
 	 * @see		Phetiche_request();
 	 * @see 	processURL();
@@ -106,7 +106,7 @@ class Phetiche_url {
 	 * Process the URL into a valid, usable, Phetiche_request object.
 	 * This also sets the requested controller and method.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $url	The URL to be processed
 	 * @see		explodeURL();
 	 * @see 	processURL();
@@ -163,7 +163,7 @@ class Phetiche_url {
 	/**
 	 * Parse the command line arguments.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param string $command_call The command line (cli) call being issued
 	 * @param array $part (Reference) The parsed URL array.
 	 * @return	void
@@ -213,7 +213,7 @@ class Phetiche_url {
 	 * Phetiche format. It does a regular expression split on the URL
 	 * to determine the basic arguments being passed in.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $url	The URL to be exploded
 	 * @see		Phetiche_server::REQUEST_URI();
 	 * @see 	Phetiche_request::readInput();

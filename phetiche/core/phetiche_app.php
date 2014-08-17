@@ -5,7 +5,7 @@
  *
  * @file			phetiche/core/phetiche_app.php
  * @description		The actual application object.
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
  *
@@ -22,7 +22,7 @@ final class Phetiche_app {
 	 * it -and from here into the controller. Maybe one day it makes us happy that it
 	 * is around here. ;)
 	 *
-	 * @author Stefan Aichholzer <yo@stefan.ec>
+	 * @author Stefan Aichholzer <play@analogbird.com>
 	 * @see	Phetiche_config::get();
 	 * @see	RedBean_ModelHelper::setModelFormatter();
 	 * @see	Phetiche_BASIC_model_formatter();
@@ -63,59 +63,12 @@ final class Phetiche_app {
 	/**
 	 * Class/object destructor.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @return	void
 	 */
 	public function __destruct()
 	{
 
-   	}
-
-	/**
-	 * DB setup.
-	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
-	 * @return	void
-	 */
-   	private function startDB()
-   	{
-	   	/**
-		 * Start using a DB (if one has been defined in the config file)
-		 */
-		 $valid_engines = ['mysql', 'pgsql', 'cubrid', 'sqlite'];
-
-		$db_settings = Phetiche_config::get('db');
-		if ($db_settings && in_array($db_settings['engine'], $valid_engines) ) {
-
-			/**
-			 * Setup the ORM (Redbean is not really an ORM, at least not at the time of this writing...)
-			 * and define our custom model naming convention.
-			 */
-			$db_settings['engine'] = (isset($db_settings['engine'])) ? $db_settings['engine'] : 'mysql';
-			switch ($db_settings['engine']) {
-				case 'cubrid':	$setup_string = sprintf('%s:host=%s;port=%d;dbname=%s', $db_settings['engine'], $db_settings['host'], $db_settings['port'], $db_settings['name']);
-								break;
-
-				case 'sqlite':	$setup_string = sprintf('%s:%s', $db_settings['engine'], $db_settings['name']);
-								break;
-
-				default:		$setup_string = sprintf('%s:host=%s;dbname=%s', $db_settings['engine'], $db_settings['host'], $db_settings['name']);
-			}
-
-			R::setup($setup_string, $db_settings['user'], $db_settings['pass']);
-			RedBean_ModelHelper::setModelFormatter(new Phetiche_BASIC_model_formatter());
-
-			/**
-			 * This is to avoid issues on tables with underscores in names.
-			 * See: http://redbeanphp.com/extra/upgrade_3_2_to_3_3
-			 */
-			R::setStrictTyping(false);
-
-			/**
-			 * Should the DB schema be frozen?
-			 */
-			R::freeze($db_settings['freeze']);
-		}
    	}
 
 }
