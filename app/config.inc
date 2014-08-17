@@ -1,11 +1,19 @@
 <?php
 
-	// General & default settings
-	$config['default']['private_key'] = '321158f1e8b0f68197ac75b2b029158b06798efa9dd077ce5164de6de7765418';
-	$config['default']['time_zone'] = 'Europe/Amsterdam';
-	$config['default']['debug'] = true;
-	$config['default']['log_errors'] = true;
-	$config['default']['apc_cache'] = false;
+	$config = [
+		'core' => [
+			'private_key' => '321158f1e8b0f68197ac75b2b029158b06798efa9dd077ce5164de6de7765418',
+			'time_zone' => 'Europe/Amsterdam',
+			'debug' => true,
+			'logging' => true,
+			'apc_cache' => false,
+		]
+	];
+
+	/**
+	 * Custom (application specific settings)
+	 * should go below this point.
+	 */
 
 	// Templating engine settings
 	$config['templates']['path'] = 'public/views/';
@@ -16,13 +24,7 @@
 	$config['templates']['cache_lifetime'] = 120;
 
 	// URL routing (even more) settings
-	$config['app']['routes'] = array('/sample/war/' => '/basic/index');
-
-
-	/**
-	 * Custom (application specific settings)
-	 * should (could) go below this point.
-	 */
+	$config['app']['routes'] = ['/sample/war/' => '/basic/index'];
 
 	// Database settings
 	// See http://redbeanphp.com/manual/freeze

@@ -6,7 +6,7 @@
  * @file			phetiche/core/phetiche_server.php
  * @description		The server object. This will handle anything related to the server.
  * 					Using this method is optional but recommended.
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
  *
@@ -53,7 +53,7 @@ class Phetiche_server {
      * 	REQUEST_TIME_FLOAT
      * 	REQUEST_TIME
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $method The method being called.
 	 * @param	array $args Any parameters passed in the call (Not used here).
 	 * @return	mixed $response The value (string) on success or false (boolean) on failure.
@@ -85,7 +85,7 @@ class Phetiche_server {
 	 * Returns the base path of the Phetiche installation
 	 * (on level before /public)
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @return	string $base_path The base Phetiche installation path.
 	 */
 	public static function basePath($append_slash = false)

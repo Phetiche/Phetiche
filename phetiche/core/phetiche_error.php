@@ -7,7 +7,7 @@
  * @description		The error object. This will handle all errors and failures, hopefully.
  * 					This class extendes the native Exception object in order for it to be able
  * 					to throw valid exceptions -throw new Phetiche_error();
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
  *
@@ -29,7 +29,7 @@ class Phetiche_error extends Exception {
 	 * Generate a nice debug trace from the error stack.
 	 * This very function will not be named in this stack trace, of course. ;)
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @return	array $simple_trace An array with the error trace
 	 */
 	private static function getDebugTrace()
@@ -69,7 +69,7 @@ class Phetiche_error extends Exception {
 	 * It makes use of the pre-defined error pages which can be over ruled if custom
 	 * pages are found (in the right location).
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	integer $err The error code being returned
 	 * @return	void
 	 *
@@ -115,7 +115,7 @@ class Phetiche_error extends Exception {
 	/**
 	 * Logs an error to the error.log file
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	integer $err The error code being logged
 	 * @param	string $file The file which reported the error
 	 * @param	string $line The line at which the error took place

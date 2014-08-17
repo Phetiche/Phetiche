@@ -6,7 +6,7 @@
  * @file			phetiche/core/phetiche_response.php
  * @description		The response object. This will handle the response related actions.
  * 					Using this method is optional but recommended.
- * @author			Stefan Aichholzer <yo@stefan.ec>
+ * @author			Stefan Aichholzer <play@analogbird.com>
  * @package			Phetiche/core
  * @license			BSD/GPLv2
  *
@@ -82,7 +82,7 @@ class Phetiche_response {
 	/**
 	 * Class/object constructor.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $invoking_controller The name of the controller who was called
 	 * @param	array $req The data parsed from the request
 	 * @return	void
@@ -100,7 +100,7 @@ class Phetiche_response {
 	 * Class/object destructor.
 	 * Unset the object itself
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @return	void
 	 */
 	public function __destruct()
@@ -116,7 +116,7 @@ class Phetiche_response {
 	 * This comes in handy, since by default sending the response will terminate
 	 * the script execution, thus the after() (if defined) will not be triggered.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $function The function to be called before send()
 	 * @param	array $args The arguments to be passed to the function
 	 * @see		Phetiche_response->send();
@@ -133,7 +133,7 @@ class Phetiche_response {
 	 * Throws an error (Phetiche_error) on exceptions.
 	 * If the code does not seem to be valid an exception will be thrown.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	int $code The (HTTP) code to be returned (as a HTTP header)
 	 * @return	Self (For chainability)
 	 */
@@ -151,7 +151,7 @@ class Phetiche_response {
 	/**
 	 * Set the body to be sent back.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $content The content to be sent back to the client
 	 * @return	Self (For chainability)
 	 */
@@ -166,7 +166,7 @@ class Phetiche_response {
 	 * Send the response to the client.
 	 * By default sending a response will end the execution of the application.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @return	void
 	 */
 	public function send()
@@ -237,7 +237,7 @@ class Phetiche_response {
 	 * Is an "alias" to send but this one endes the response completely.
 	 * This method will end the execution of the application.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @see $this->send()
 	 * @return	void
 	 */
@@ -255,7 +255,7 @@ class Phetiche_response {
 	 * Format (and print) the output to match the text/html Content-Type
 	 * (if possible)
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @return	void
 	 */
 	private function formatTexthtml()
@@ -278,7 +278,7 @@ class Phetiche_response {
 	 * Make sure the $variables array is associative, else
 	 * an auto-incremental index key will be used by default.
 	 *
-	 * @author	Stefan Aichholzer <yo@stefan.ec>
+	 * @author	Stefan Aichholzer <play@analogbird.com>
 	 * @param	string $template_name The name of the template to render
 	 * @param	array $variables The variables to be assigned to the template
 	 * @see		Smarty();

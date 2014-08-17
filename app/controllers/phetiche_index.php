@@ -60,11 +60,11 @@ class Phetiche_index extends Phetiche_BASIC_Controller {
 		//format::tree($this->req);
 
 		// Create a simple image
-		$image = new image();
+		/*$image = new image();
 		echo $image->render(195, 30, 'Welcome to my world!', 5, 10, 7, '0:41:93', '107:179:101', 1, true) . '<br /><br />';
 
 		$image = new image();
-		echo $image->render(195, 30, 'Another image...', 5, 10, 7, '107:179:101', '0:41:93', 1, true) . '<br /><br />';
+		echo $image->render(195, 30, 'Another image...', 5, 10, 7, '107:179:101', '0:41:93', 1, true) . '<br /><br />';*/
 
 		// Get the GET arguments
 
